@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Box, Center, Heading, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Text, Stack } from '@chakra-ui/react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from 'recharts';
-
+import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, LabelList } from 'recharts';
+import CustomSlider from '../components/CustomSlider';
 
 import type { MetaFunction } from "@remix-run/node";
 
@@ -36,61 +35,37 @@ export default function Index() {
 
 
   return (
-    <div className='p-8'>
+    <div className='p-20'>
 
-      <div className='flex justify-center'>
+      <header className='flex justify-center'>
         <h1 className='text-4xl mb-5 w-[30rem] text-center'>Calculate Your Recurring Passive Income</h1>
-      </div>
+      </header>
 
       <div className="flex flex-row space-x-10">
         {/* Left Panel */}
-        <div className="w-1/3">
-          <div className="mb-2">Referred Customers per month</div>
-          <input
-            type="range"
-            defaultValue={1}
-            min={0}
-            max={100}
-            step={1}
-            onChange={setReferrals}
-            className="w-full"
-          />
+        <section className="w-1/3 p-8">
+          <p className='mb-10'>Add in your excepted refferrals to see how much you could earn as a <span className="font-bold">Sunvoy Affiliate</span> in just 1 year.</p>
+          <CustomSlider label="Reffered customers per month" onChange={setReferrals} />
 
-          <div className="mt-4 mb-2">Avg. new projects per month</div>
-          <input
-            type="range"
-            defaultValue={10}
-            min={0}
-            max={100}
-            step={1}
+          <CustomSlider label="Avg. new projects per month"
             onChange={setNewProjects}
-            className="w-full"
-          />
+            tooltipLabel="tooltip help" />
+          <CustomSlider label="Avg. existing projects" tooltipLabel="tooltip help" onChange={setExistingProjects} />
 
-          <div className="mt-4 mb-2">Avg. existing projects</div>
-          <input
-            type="range"
-            defaultValue={300}
-            min={0}
-            max={1000}
-            step={10}
-            onChange={setExistingProjects}
-            className="w-full"
-          />
-
-          <div className="mt-8 text-2xl font-bold">
-            Your monthly income after 1 year: <br />${(7505).toLocaleString()}
+          <div className="mt-8 text-center">
+            <p>Your <span className="font-bold">monthly income </span> after 1 year:</p>
+            <p className="text-5xl mt-5">${(7505).toLocaleString()}</p>
           </div>
-        </div>
+        </section>
 
         {/* Right Panel: Chart */}
-        <div className="w-2/3">
+        <section className="w-2/3">
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={chartData}>
 
               <XAxis dataKey="month" tickFormatter={(value) => value} stroke='none' />
               <Tooltip />
-              <Bar dataKey="income" fill="#82ca9d">
+              <Bar dataKey="income" fill="#afcc54">
                 <LabelList dataKey='income' position='top' formatter={(value: number) => `$${new Intl.NumberFormat().format(value)}`} />
                 <LabelList
                   dataKey="month"
@@ -100,7 +75,10 @@ export default function Index() {
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-        </div>
+        </section>
+      </div>
+      <div className='flex justify-center text-center'>
+        <p>Calculations are based on the number of customers you refer each month and thier avg. project volume.<br />Factor in our churm and this bring you to your estimated total passive future income. </p>
       </div>
     </div>
   );
