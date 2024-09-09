@@ -7,6 +7,8 @@ import CustomSlider from "../components/CustomSlider";
 import CustomGraph from "../components/CustomGraph";
 
 import type { MetaFunction } from "@remix-run/node";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const meta: MetaFunction = () => {
       return [
@@ -105,7 +107,10 @@ export default function Index() {
                         <section className="w-full md:w-2/3">
                               {loading ? (
                                     <div className="h-96 w-full flex justify-center items-center">
-                                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></div>
+                                          <FontAwesomeIcon
+                                                icon={faCircleNotch}
+                                                className="animate-spin text-5xl text-gray-900"
+                                          />
                                     </div>
                               ) : (
                                     <CustomGraph chartData={chartData} />

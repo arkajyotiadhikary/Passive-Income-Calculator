@@ -1,5 +1,5 @@
 import React from "react";
-import { ResponsiveContainer, BarChart, XAxis, Tooltip, Bar, LabelList } from "recharts";
+import { ResponsiveContainer, BarChart, XAxis, Tooltip, Bar, LabelList, Cell } from "recharts";
 import CustomLabel from "./CustomLabel";
 
 interface CustomGraphProps {
@@ -10,8 +10,6 @@ interface CustomGraphProps {
 }
 
 const CustomGraph: React.FC<CustomGraphProps> = ({ chartData }) => {
-      const limitedChartData = chartData.slice(0, 12);
-
       const tickFormatter = (value: string, index: number) => {
             if (index === 0 || value === "Jan") {
                   return `${value}\t2024`;
@@ -20,8 +18,8 @@ const CustomGraph: React.FC<CustomGraphProps> = ({ chartData }) => {
       };
 
       return (
-            <ResponsiveContainer width="100%" height={400} className={""}>
-                  <BarChart data={limitedChartData}>
+            <ResponsiveContainer width="100%" height={400}>
+                  <BarChart data={chartData}>
                         <XAxis
                               dataKey="month"
                               tickFormatter={tickFormatter}
@@ -30,18 +28,37 @@ const CustomGraph: React.FC<CustomGraphProps> = ({ chartData }) => {
                         />
                         <Tooltip
                               cursor={{ fill: "#fff" }}
-                              contentStyle={{ backgroundColor: "#333", borderRadius: 4 }}
-                              labelStyle={{ fontSize: 14, color: "#fff" }}
+                              contentStyle={{
+                                    backgroundColor: "#f9fafb",
+                                    borderRadius: 4,
+                                    color: "#fff",
+                              }}
+                              labelStyle={{ fontSize: 14, color: "black" }}
                               wrapperStyle={{ boxShadow: "0 0 10px rgba(0,0,0,0.5)" }}
+                              formatter={(value: number) => (
+                                    <span style={{ color: "#afcc54" }}>
+                                          ${value.toLocaleString()}
+                                    </span>
+                              )}
                         />
-                        <Bar dataKey="income" fill="#afcc54">
+                        <Bar dataKey="income">
+                              {chartData.map((entry, index) => (
+                                    <Cell
+                                          key={`cell-${index}`}
+                                          fill={
+                                                index === chartData.length - 1
+                                                      ? "#afcc54"
+                                                      : "#eef2f7"
+                                          }
+                                    />
+                              ))}
                               <LabelList
                                     dataKey="income"
                                     position="top"
                                     formatter={(value: number) =>
                                           `$${new Intl.NumberFormat().format(value)}`
                                     }
-                                    style={{ fontSize: 14 }}
+                                    style={{ fontSize: 14, fill: "gray" }}
                               />
                               <LabelList dataKey="month" position="bottom" content={CustomLabel} />
                         </Bar>
