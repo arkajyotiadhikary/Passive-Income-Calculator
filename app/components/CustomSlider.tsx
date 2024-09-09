@@ -30,8 +30,11 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
                         {label}
                         {tooltipLabel && (
                               <Tooltip label={tooltipLabel} fontSize="md">
-                                    <span>
-                                          <FontAwesomeIcon className="ml-2" icon={faCircleInfo} />
+                                    <span className="inline-flex items-center">
+                                          <FontAwesomeIcon
+                                                className="h-4 w-4 ml-2"
+                                                icon={faCircleInfo}
+                                          />
                                     </span>
                               </Tooltip>
                         )}
