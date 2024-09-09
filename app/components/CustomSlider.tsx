@@ -40,7 +40,18 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
                         className="w-16 pl-2 text-right bg-transparent outline-none"
                         type="number"
                         value={currentValue}
-                        onChange={(e) => onChange(Number(e.target.value))}
+                        onChange={(e) => {
+                              const value = Number(e.target.value);
+                              if (value < min) {
+                                    onChange(min);
+                              } else if (value > max) {
+                                    onChange(max);
+                              } else {
+                                    onChange(value);
+                              }
+                        }}
+                        min={min}
+                        max={max}
                   />
             </div>
             <Slider
@@ -48,6 +59,7 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
                   min={min}
                   max={max}
                   step={step}
+                  value={currentValue}
                   onChange={onChange}
                   colorScheme="blackAlpha"
             >

@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Skeleton } from "@chakra-ui/react";
+
 import axios from "axios";
 
 import CustomSlider from "../components/CustomSlider";
@@ -51,9 +53,9 @@ export default function Index() {
                         </h1>
                   </header>
 
-                  <div className="flex flex-row space-x-10">
+                  <div className="flex flex-col md:flex-row md:space-x-10">
                         {/* Left Panel */}
-                        <section className="w-1/3 p-8">
+                        <section className="w-full md:w-1/3 p-8">
                               <p className="mb-10">
                                     Add in your excepted refferrals to see how much you could earn
                                     as a <span className="font-bold">Sunvoy Affiliate</span> in just
@@ -86,17 +88,21 @@ export default function Index() {
 
                               <div className="mt-8 text-center">
                                     <p>
-                                          Your <span className="font-bold">monthly income </span>{" "}
+                                          Your <span className="font-bold">monthly income </span>
                                           after 1 year:
                                     </p>
-                                    <p className="text-5xl mt-5">
-                                          ${totalRevenue.toLocaleString()}
-                                    </p>
+                                    {loading ? (
+                                          <Skeleton height="40px" className="text-5xl mt-5" />
+                                    ) : (
+                                          <p className="text-5xl mt-5">
+                                                ${totalRevenue.toLocaleString()}
+                                          </p>
+                                    )}
                               </div>
                         </section>
 
                         {/* Right Panel: Chart */}
-                        <section className="w-2/3">
+                        <section className="w-full md:w-2/3">
                               {loading ? (
                                     <div className="h-96 w-full flex justify-center items-center">
                                           <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></div>
