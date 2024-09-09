@@ -25,7 +25,10 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
       tooltipLabel,
 }) => (
       <>
-            <div className="mb-2 flex justify-between" aria-label={label}>
+            <div
+                  className="mb-2 font-sans text-sm md:text-base font-medium flex justify-between"
+                  aria-label={label}
+            >
                   <div>
                         {label}
                         {tooltipLabel && (
@@ -75,7 +78,7 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
                   </SliderTrack>
                   <SliderThumb
                         sx={{
-                              bg: "#27252b",
+                              bg: "#5b5d62",
                         }}
                   />
             </Slider>

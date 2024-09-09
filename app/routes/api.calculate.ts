@@ -13,7 +13,7 @@ interface ICalculateRevenue {
 }
 
 const monthlyRevenue = (newProjects: number, existingProjects: number) =>
-      newProjects * FEE_PER_NEW_PROJECT + existingProjects * FEE_PER_EXISTING_PROJECT;
+      Math.floor(newProjects * FEE_PER_NEW_PROJECT + existingProjects * FEE_PER_EXISTING_PROJECT);
 
 const calculateRevenue = ({
       referredCustomersPerMonth,
@@ -38,9 +38,7 @@ const calculateRevenue = ({
                   totalCustomers * monthlyRevenue(newProjects, existingProjects);
             totalRevenue += revenueForThisMonth;
 
-            const incomeForThisMonth =
-                  Math.round((revenueForThisMonth * REFERRAL_PAYOUT_RATE + Number.EPSILON) * 100) /
-                  100;
+            const incomeForThisMonth = Math.floor(revenueForThisMonth * REFERRAL_PAYOUT_RATE);
             const monthName = months[(currentMonthIndex + month) % 12];
 
             monthlyRevenues.push({ month: monthName, income: incomeForThisMonth });
@@ -48,7 +46,7 @@ const calculateRevenue = ({
             totalCustomers = totalCustomers * (1 - CHURN_RATE) + referredCustomersPerMonth;
       }
 
-      totalRevenue = Math.round((totalRevenue + Number.EPSILON) * 100) / 100;
+      totalRevenue = Math.floor(totalRevenue);
 
       return {
             totalRevenue,

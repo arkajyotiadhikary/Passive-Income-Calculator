@@ -23,7 +23,7 @@ const CustomGraph: React.FC<CustomGraphProps> = ({ chartData }) => {
                         <XAxis
                               dataKey="month"
                               tickFormatter={tickFormatter}
-                              tick={{ fontSize: 12 }}
+                              tick={{ fontSize: 20 }}
                               stroke="none"
                         />
                         <Tooltip
@@ -33,7 +33,7 @@ const CustomGraph: React.FC<CustomGraphProps> = ({ chartData }) => {
                                     borderRadius: 4,
                                     color: "#fff",
                               }}
-                              labelStyle={{ fontSize: 14, color: "black" }}
+                              labelStyle={{ fontSize: 20, color: "black", fontWeight: 300 }}
                               wrapperStyle={{ boxShadow: "0 0 10px rgba(0,0,0,0.5)" }}
                               formatter={(value: number) => (
                                     <span style={{ color: "#afcc54" }}>
@@ -48,7 +48,7 @@ const CustomGraph: React.FC<CustomGraphProps> = ({ chartData }) => {
                                           fill={
                                                 index === chartData.length - 1
                                                       ? "#afcc54"
-                                                      : "#eef2f7"
+                                                      : "#D3D3D3"
                                           }
                                     />
                               ))}
@@ -58,9 +58,22 @@ const CustomGraph: React.FC<CustomGraphProps> = ({ chartData }) => {
                                     formatter={(value: number) =>
                                           `$${new Intl.NumberFormat().format(value)}`
                                     }
-                                    style={{ fontSize: 14, fill: "gray" }}
+                                    style={{
+                                          fontSize: 20,
+                                          fill: "gray",
+                                          fontWeight: 300,
+                                    }}
                               />
-                              <LabelList dataKey="month" position="bottom" content={CustomLabel} />
+                              <LabelList
+                                    dataKey="month"
+                                    position="bottom"
+                                    content={CustomLabel}
+                                    style={{
+                                          fontSize: 20,
+                                          fill: "gray",
+                                          fontWeight: 300,
+                                    }}
+                              />
                         </Bar>
                   </BarChart>
             </ResponsiveContainer>

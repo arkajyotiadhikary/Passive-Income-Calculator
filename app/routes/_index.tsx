@@ -50,7 +50,7 @@ export default function Index() {
       return (
             <div className="p-20">
                   <header className="flex justify-center">
-                        <h1 className="text-4xl mb-5 w-[30rem] text-center">
+                        <h1 className="font-sans font-bold text-5xl mb-5 w-[40rem] text-center">
                               Calculate Your Recurring Passive Income
                         </h1>
                   </header>
@@ -58,11 +58,11 @@ export default function Index() {
                   <div className="flex flex-col md:flex-row md:space-x-10">
                         {/* Left Panel */}
                         <section className="w-full md:w-1/3 p-8">
-                              <p className="mb-10">
-                                    Add in your excepted refferrals to see how much you could earn
-                                    as a <span className="font-bold">Sunvoy Affiliate</span> in just
-                                    1 year.
-                              </p>
+                              <h2 className="mb-10 font-sans text-xl">
+                                    Add in your expected referrals to see how much you could earn as
+                                    a <span className="font-bold">Sunvoy Affiliate</span> in just 1
+                                    year.
+                              </h2>
                               <CustomSlider
                                     label="Reffered customers per month"
                                     min={1}
@@ -89,14 +89,14 @@ export default function Index() {
                               />
 
                               <div className="mt-8 text-center">
-                                    <p>
+                                    <h2 className="font-sans text-xl">
                                           Your <span className="font-bold">monthly income </span>
                                           after 1 year:
-                                    </p>
+                                    </h2>
                                     {loading ? (
-                                          <Skeleton height="40px" className="text-5xl mt-5" />
+                                          <Skeleton height="40px" className="text-6xl mt-5" />
                                     ) : (
-                                          <p className="text-5xl mt-5">
+                                          <p className="text-6xl mt-5 font-sans font-bold">
                                                 ${totalRevenue.toLocaleString()}
                                           </p>
                                     )}
